@@ -5,7 +5,7 @@ if [ ! -f ~/Desktop/karaokeMugenUpdate.desktop ];then
 echo '[Desktop Entry]
 Name=Karaoke Mugen Update
 Comment=Update Karaoke Mugen
-Icon='${MUGEN_PI_DIR}'/updateicon.png
+Icon='${MUGEN_PI_DIR}'/img/updateicon.png
 Exec=lxterminal -t "Update Karaoke Mugen" --working-directory='${MUGEN_PI_DIR}' -e ./update.sh
 Type=Application
 Encoding=UTF-8

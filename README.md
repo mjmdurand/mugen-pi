@@ -65,6 +65,7 @@ If you wanna use USB 3.0 to boot, just flash your drive (key or disk) with laste
 - If you wanna customize karaoke options, go on Operator Panel, click on top right karaoke mugen logo and select Options
 
 # To-do list
+- Update ... update script
 - check new raspberry pi OS x64
 - add ubuntu support for desktop & shortcuts (AKA Gnome)
 

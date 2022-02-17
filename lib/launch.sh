@@ -5,7 +5,7 @@ if [ ! -f ~/Desktop/karaokeMugen.desktop ];then
 echo '[Desktop Entry]
 Name=Karaoke Mugen
 Comment=Launch Karaoke Mugen
-Icon='${MUGEN_PI_DIR}'/icon.png
+Icon='${MUGEN_PI_DIR}'/img/icon.png
 Exec=lxterminal -t "Karaoke Mugen" --working-directory='${MUGEN_PI_DIR}' -e ./launch.sh
 Type=Application
 Encoding=UTF-8

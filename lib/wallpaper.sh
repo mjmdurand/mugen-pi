@@ -14,7 +14,7 @@ fi
 echo '[*]
 wallpaper_mode=crop
 wallpaper_common=1
-wallpaper='${MUGEN_PI_DIR}'/mugenpi.png
+wallpaper='${MUGEN_PI_DIR}'/img/mugenpi.png
 desktop_bg=#d6d3de
 desktop_fg=#e8e8e8
 desktop_shadow=#d6d3de

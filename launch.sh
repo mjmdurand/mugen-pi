@@ -15,6 +15,8 @@ sudo service postgresql start
 #moving to user's directory
 cd ~/karaokemugen-app
 
-#launch Karaoke Mugen
+#launch Karaoke Mugen without electron
 #yarn startNoElectron
+
+#launch Karaoke Mugen with electron
 yarn start
