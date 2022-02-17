@@ -49,12 +49,10 @@ If you wanna use USB 3.0 to boot, just flash your drive (key or disk) with laste
 # Launch Karaoke Mugen
 **You must launch it with the Raspberry pi terminal/Desktop, SSH won't work as Karaoke Mugen manipulate ffmpeg and mpv**
 - Just click on the desktop shortcut.
-- If you launch Karaoke Mugen without Electron (`yarn start --cli --cli` command) you can find the **security code**, in your terminal.
 
 **If shortcut don't work**
 - Karaoke Mugen has been installed on your user directory, you just can go into it by using command `cd ~` in LXTerminal.
 - Use the command `yarn start` to launch Karaoke Mugen
-- Use the command `yarn start --cli --cli` to launch Karaoke Mugen **without electron GUI** (yes, you have to type twice --cli, fixed in 5.1.* versions)
 
 # Useful things
 - You can access to Karaoke Mugen from any peripherical on the same network, just check the raspi IP adress.
@@ -67,5 +65,6 @@ If you wanna use USB 3.0 to boot, just flash your drive (key or disk) with laste
 - If you wanna customize karaoke options, go on Operator Panel, click on top right karaoke mugen logo and select Options
 
 # To-do list
-- Make script more flexible with arguments (./build-on-rpi.sh --nowallpaper --noportforwarding --nosymlinks --noshortcuts --nofilemanager --ubuntu --debian-lxde) in order to let it run properly on other OS.
+- check new raspberry pi OS x64
+- add ubuntu support for desktop & shortcuts (AKA Gnome)
 
