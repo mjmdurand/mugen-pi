@@ -41,7 +41,7 @@ If you wanna use USB 3.0 to boot, just flash your drive (key or disk) with laste
 # Build Karaoke Mugen
 **You can do all this by SSH if you prefer**
 
-- Open LXTerminal and clone this git with command `git clone https://lab.shelter.moe/mjm/mugen-pi.git`.
+- Open LXTerminal and clone this git with command `git clone https://github.com/mjmdurand/mugen-pi.git`.
 - Go into the new folder `cd mugen-pi`
 - Launch the install script : `./build-on-rpi.sh`
 - Drink a coffee and everything should be fine
