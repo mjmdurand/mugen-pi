@@ -5,6 +5,7 @@ KARAOKE_MUGEN_DIR=~/karaokemugen-app
 SONG_DIR=~/songs-karaokemugen
 MPVREQUIRED=0.32.0-1
 LOG=$PWD/log.txt
+RESTART=false
 
 #Welcome message
 clear
@@ -38,12 +39,13 @@ else
       ;;
     "Launch")
       source ${MUGEN_PI_DIR}/lib/launch.sh
+      RESTART=true
       echo -e "\e[1;33mYou need to restart to apply the changes (launch shortcut).\e[0m"
       whiptail --title "Karaoke Mugen installation" --msgbox "You'll need to restart or logout to finish the installation of the following element : \n\n- Launch shortcut" 15 60
       ;;
     "Update")
-        source ${MUGEN_PI_DIR}/lib/update.sh
-      echo "Option 3 was selected"
+      source ${MUGEN_PI_DIR}/lib/update.sh
+      RESTART=true
       echo -e "\e[1;33mYou need to restart to apply the changes (update shortcut).\e[0m"
       whiptail --title "Karaoke Mugen installation" --msgbox "You'll need to restart or logout to finish the installation of the following element : \n\n- Update shortcut" 15 60
       ;;
@@ -57,13 +59,13 @@ else
       ;;
     "Wallpaper")
     source ${MUGEN_PI_DIR}/lib/wallpaper.sh
-      echo "Option 4 was selected"
+      RESTART=true
       echo -e "\e[1;33mYou need to restart to apply the changes (wallpaper).\e[0m"
       whiptail --title "Karaoke Mugen installation" --msgbox "You'll need to restart or logout to finish the installation of the following element : \n\n- Wallpaper" 15 60
       ;;
     "Filemanager")
     source ${MUGEN_PI_DIR}/lib/filemanager.sh
-      echo "Option 5 was selected"
+      RESTART=true
       echo -e "\e[1;33mYou need to restart to apply the changes (filemanager).\e[0m"
       whiptail --title "Karaoke Mugen installation" --msgbox "You'll need to restart or logout to finish the installation of the following element : \n\n- Filemanager" 15 60
       ;;
@@ -85,12 +87,16 @@ echo -e "\n\e[1;32mInstallation finished, you can check log.txt if you have any 
 # Display ending informations
 whiptail --title "Karaoke Mugen installation" --msgbox "Installation finished, you can check log.txt if you have any issues to launch Karaoke Mugen." 15 60
 
-# prompt for restart
-if (whiptail --title "Karaoke Mugen installation" --yesno "Do you want to restart now to finish installation  ?" 15 60) then
-	
-    sudo reboot
-else
-	whiptail --title "Karaoke Mugen installation" --msgbox "You'll need to restart or logout later to finish the installation." 15 60
+if [ ${RESTART} = true ];then
+  # prompt for restart
+  if (whiptail --title "Karaoke Mugen installation" --yesno "Do you want to restart now to finish installation  ?" 15 60) then
+    
+      sudo reboot
+  else
+    whiptail --title "Karaoke Mugen installation" --msgbox "You'll need to restart or logout later to finish the installation." 15 60
+  fi
 fi
+
+
 
 
