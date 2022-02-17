@@ -49,7 +49,7 @@ fi
 #if mpv version is > 0.32, user can choose version to install
 echo -e "\n\e[1;44mSelect Karaoke Mugen version.\e[0m"
 if [ ${MPVCHECK} = true ];then
-    OPTION=$(whiptail --title "Menu Box" --menu "Choisissez votre distriubtion linux" 15 60 4 \
+    OPTION=$(whiptail --title "Karaoke Mugen installation" --menu "Choisissez votre distriubtion linux" 15 60 4 \
     "1" "Latest" \
     "2" "Next" \
     "3" "5.0.37" 3>&1 1>&2 2>&3)
@@ -95,13 +95,34 @@ fi
 
 if [ ${VERSION_TO_INSTALL} = "Latest" ];then
 echo -e "\e[1;33mDownloading Latest version\e[0m"
-git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG}
+git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG} &
+{
+    for ((i = 0 ; i <= 100 ; i+=1)); do
+        sleep 0.3
+        echo $i
+    done
+} | whiptail --title "Karaoke Mugen installation" --gauge "Downloading Karaoke Mugen" 8 78 0
+wait -n
 elif [ ${VERSION_TO_INSTALL} = "Next" ];then
 echo -e "\e[1;33mDownloading Next version\e[0m"
-git clone --recursive --branch next https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG}
+git clone --recursive --branch next https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG} &
+{
+    for ((i = 0 ; i <= 100 ; i+=1)); do
+        sleep 0.3
+        echo $i
+    done
+} | whiptail --title "Karaoke Mugen installation" --gauge "Downloading Karaoke Mugen" 8 78 0
+wait -n
 else
 echo -e "\e[1;33mDownloading ${VERSION_TO_INSTALL} version\e[0m"
-git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG}
+git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG} &
+{
+    for ((i = 0 ; i <= 100 ; i+=1)); do
+        sleep 0.3
+        echo $i
+    done
+} | whiptail --title "Karaoke Mugen installation" --gauge "Downloading Karaoke Mugen" 8 78 0
+wait -n
 cd ${KARAOKE_MUGEN_DIR}
 git checkout ${HASH_COMMIT}
 fi
@@ -157,7 +178,7 @@ yarn setup &>> ${LOG} &
         echo 100
         # Give it some time to display the progress to the user.
         sleep 2
-} | whiptail --title "Building Karaoke Mugen" --gauge "Building FrontEnd and BackEnd" 8 78 0
+} | whiptail --title "Karaoke Mugen installation" --gauge "Building FrontEnd and BackEnd" 8 78 0
 
 
 
