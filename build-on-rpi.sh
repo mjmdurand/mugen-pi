@@ -35,8 +35,6 @@ else
     case "$CHOICE" in
     "Core")
       source lib/core.sh
-      echo -e "\n\e[1;44mSong folder will be located here ${SONG_DIR}\e[0m\n\e[1;41mPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)\e[0m"
-      whiptail --title "Karaoke Mugen installation" --msgbox "Song folder will be located here : \n${SONG_DIR} \n\nPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)" 15 60
       ;;
     "Launch")
       source lib/launch.sh
@@ -51,6 +49,8 @@ else
       ;;
     "Folder")
     source lib/folders.sh
+    echo -e "\n\e[1;44mSong folder will be located here ${SONG_DIR}\e[0m\n\e[1;41mPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)\e[0m"
+      whiptail --title "Karaoke Mugen installation" --msgbox "Song folder will be located here : \n${SONG_DIR} \n\nPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)" 15 60
       ;;
     "Port")
     source lib/port.sh
