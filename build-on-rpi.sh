@@ -366,6 +366,27 @@ echo -e "\e[1;33mdesktop-items-0.conf created.\e[0m"
 
 echo -e "\n\e[1;32mDone.\e[0m"
 echo
+
 #Finish installation
-read -n 1 -s -r -p "Press any key to reboot and finish installation"
-#sudo reboot
+echo -e "\n\e[1;44mFinish installation.\e[0m"
+echo -e "\e[1;33mYou need to restart to apply all changes (wallpaper, filemanager, shortcuts).\e[0m"
+PS3='Restart now ? '
+versions=("yes" "no")
+select fav in "${versions[@]}"; do
+    case $fav in
+        "yes")
+            echo -e "\e[1;32mInstallation finished, you can check log.txt if you have any issues to launch Karaoke Mugen.\e[0m"
+            echo -e "\e[1;41mSystem is gonna restart in 10 seconds.\e[0m"
+            sleep 10
+            sudo reboot
+            break
+            ;;
+        "no")
+            echo -e "\e[1;32mInstallation finished, you can check log.txt if you have any issues to launch Karaoke Mugen.\e[0m"
+            echo -e "\e[1;41mYou need to restart or logout to finish the installation.\e[0m"
+            break
+            ;;
+        *) echo -e "\e[1;41minvalid option $REPLY\e[0m";;
+    esac
+done
+
