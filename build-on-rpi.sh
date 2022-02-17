@@ -20,7 +20,7 @@ sleep 5
 
 # update system and install softwares
 echo -e "\e[1;34mUpdating the system.\e[0m"
-sudo apt update -q && sudo apt upgrade -yq &> ${LOG}
+sudo apt update -q &> ${LOG} && sudo apt upgrade -yq &> ${LOG}
 echo -e "\e[1;32mSystem updated.\e[0m"
 
 echo -e "\n\e[1;34mInstalling required software.\e[0m"
@@ -106,14 +106,12 @@ fi
 echo -e "\e[1;32mSources successfully downloaded.\e[0m"
 
 #Port Forwarding
-echo ""
 echo -e "\n\e[1;34mPort Forwarding (80 > 1337).\e[0m\n\e[1;41mChoose \"YES\" on next screens (save IPv4/IPv6 rules) if you never installed IPTABLES\e[0m"
 read -n 1 -s -r -p "Understood ! (press any key to continue)."
 sudo apt install -yq iptables-persistent 
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 1337
 
 # setting postgresql database
-echo ""
 echo -e "\n\e[1;34mCreating Postegresql database, user and grant privileges.\e[0m"
 sudo service postgresql start
 sudo -u postgres psql -c "DROP DATABASE IF EXISTS karaokemugen_app;"
@@ -135,16 +133,16 @@ echo -e "\e[1;32mPackage list updated.\e[0m"
 # build karaoke mugen
 echo -e "\n\e[1;34mBuild Karaoke Mugen.\e[0m\n\e[1;41mThis operation will take time and terminal may crash if you use wifi connexion\e[0m"
 read -n 1 -s -r -p "Understood ! (press any key to continue)."
-echo -e "\e[1;33mBuild started, please wait a moment.\e[0m"
+echo -e "\n\e[1;33mBuild started, please wait a moment (5-10 mins).\e[0m"
 yarn gitconfig &>> ${LOG}
 yarn setup &>> ${LOG}
 
 # Editing mpv required version at launch 0.33 > 0.32
 sed -i "s/MPVVersion = '>=0.33.0'/MPVVersion = '>=0.32.0'/g" ~/karaokemugen-app/src/utils/constants.ts
-echo -e "\e[1;34mBuild done.\e[0m"
+echo -e "\e[1;32mBuild done.\e[0m"
 
 # creating external song folder
-echo -e "\n\e[1;34mCreating song folder.\e[0m"
+echo -e "\n\e[1;34mCreating song folders.\e[0m"
 if [ ! -d ${SONG_DIR} ];then
 echo -e "\e[1;33mSong folder not found, creating it\e[0m"
 mkdir ${SONG_DIR}
@@ -212,7 +210,7 @@ ln -s ${SONG_DIR}/lyrics ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/lyrics
 ln -s ${SONG_DIR}/medias ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias
 ln -s ${SONG_DIR}/tags ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/tags
 echo -e "\e[1;32mDone.\e[0m"
-echo -e "\e[1;33mSong folder will be located here ${SONG_DIR}\e[0m\n\e[1;41mPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)\e[0m"
+echo -e "\n\e[1;34mSong folder will be located here ${SONG_DIR}\e[0m\n\e[1;41mPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)\e[0m"
 read -n 1 -s -r -p "Understood ! (press any key to continue)."
 
 #Generating KM configuration
@@ -236,7 +234,7 @@ echo -e "\e[1;32mConfiguration file generated.\e[0m"
 
 
 #Desktop shortcut
-echo -e "\e[1;34mCreating desktop shortcut.\e[0m"
+echo -e "\n\e[1;34mCreating desktop shortcut.\e[0m"
 if [ ! -f ~/Desktop/karaokeMugen.desktop ];then
 echo '[Desktop Entry]
 Name=Karaoke Mugen
@@ -270,6 +268,7 @@ echo ""
 fi
 
 #Edit filemanager to avoid "open in terminal" window
+echo -e "\n\e[1;34mEdit filemanager to avoid \"open in terminal\" window.\e[0m"
 if [ ! -d ~/.config/libfm ];then
 echo -e "\e[1;33mlibfm folder not found, creating it\e[0m"
 mkdir ~/.config/libfm/
@@ -337,13 +336,13 @@ fi
 echo -e "\e[1;32mDone.\e[0m"
 
 #Wallpaper
-echo -e "\e[1;34mUpdating wallpaper.\e[0m"
-if [ ! -d "~/.config/pcmanfm" ];then
+echo -e "\n\e[1;34mUpdating wallpaper.\e[0m"
+if [ ! -d ~/.config/pcmanfm ];then
 mkdir ~/.config/pcmanfm/
 echo -e "\e[1;33mpcmanfm created.\e[0m"
 fi
 
-if [ ! -d "~/.config/pcmanfm/LXDE-pi" ];then
+if [ ! -d ~/.config/pcmanfm/LXDE-pi ];then
 mkdir ~/.config/pcmanfm/LXDE-pi
 echo -e "\e[1;33mLXDE-pi created.\e[0m"
 fi
@@ -365,7 +364,7 @@ show_mounts=1' > ~/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
 echo -e "\e[1;33mdesktop-items-0.conf created.\e[0m"
 
 echo -e "\n\e[1;32mDone.\e[0m"
-
+echo
 #Finish installation
 read -n 1 -s -r -p "Press any key to reboot and finish installation"
 #sudo reboot
