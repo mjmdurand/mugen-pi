@@ -112,6 +112,7 @@ echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo deb
 echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections &>> ${LOG}
 sudo apt install -y iptables-persistent &>> ${LOG}
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 1337
+echo -e "\e[1;32mPort forwarding successfully configured.\e[0m"
 
 # setting postgresql database
 echo -e "\n\e[1;44mCreating Postegresql database, user and grant privileges.\e[0m"
@@ -126,7 +127,6 @@ sudo -u postgres psql -c "CREATE EXTENSION pgcrypto;" -d karaokemugen_app
 echo -e "\e[1;32mDatabase successfully configured.\e[0m"
 
 # editing package.json file (sentry/cli not supported on raspi atm)
-echo ""
 echo -e "\n\e[1;44mRemoving Sentry/cli package due to incompatibility.\e[0m"
 cd ${KARAOKE_MUGEN_DIR}
 sed -i '/sentry\/cli/d' package.json
@@ -364,9 +364,7 @@ show_trash=1
 show_mounts=1' > ~/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
 
 echo -e "\e[1;33mdesktop-items-0.conf created.\e[0m"
-
-echo -e "\n\e[1;32mDone.\e[0m"
-echo
+echo -e "\e[1;32mDone.\e[0m"
 
 #Finish installation
 echo -e "\n\e[1;44mFinish installation.\e[0m"
@@ -376,14 +374,14 @@ versions=("yes" "no")
 select fav in "${versions[@]}"; do
     case $fav in
         "yes")
-            echo -e "\e[1;32mInstallation finished, you can check log.txt if you have any issues to launch Karaoke Mugen.\e[0m"
+            echo -e "\n\e[1;32mInstallation finished, you can check log.txt if you have any issues to launch Karaoke Mugen.\e[0m"
             echo -e "\e[1;41mSystem is gonna restart in 10 seconds.\e[0m"
             sleep 10
             sudo reboot
             break
             ;;
         "no")
-            echo -e "\e[1;32mInstallation finished, you can check log.txt if you have any issues to launch Karaoke Mugen.\e[0m"
+            echo -e "\n\e[1;32mInstallation finished, you can check log.txt if you have any issues to launch Karaoke Mugen.\e[0m"
             echo -e "\e[1;41mYou need to restart or logout to finish the installation.\e[0m"
             break
             ;;
