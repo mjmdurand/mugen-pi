@@ -54,27 +54,27 @@ select fav in "${versions[@]}"; do
     case $fav in
         "Latest")
             VERSION_TO_INSTALL=$fav
-            echo -e "\n\e[44mCurrent version will be installed.\e[0m\n\e[1;33m/!\ You may have some bugs by installing this version\e[0m"
+            echo -e "\n\e[31mCurrent \e[0m\e[1;33mversion will be installed.\e[0m\n/!\ You may have some bugs by installing this version\e[0m"
             read -n 1 -s -r -p "Press any key to continue."
             break
             ;;
         "Next")
             VERSION_TO_INSTALL=$fav
-            echo -e "\n\e[44mNext version will be installed.\e[0m\n\e[1;33m/!\ You may have some bugs by installing this version\e[0m"
+            echo -e "\n\e[31mNext \e[0m\e[1;33mversion will be installed.\e[0m\n\e[1;33m/!\ You may have some bugs by installing this version\e[0m"
             read -n 1 -s -r -p "Press any key to continue."
             break
             ;;
         "5.0.37")
             VERSION_TO_INSTALL=$fav
             HASH_COMMIT=ec2577cc
-            echo "\nVersion $fav will be installed"
+            echo -e "\n\e[31mCurrent \e[0m\e[1;33m $fav will be installed\e[0m"
 	        break
             ;;
         "Quit")
-            echo "Installation aborted"
+            echo -e "\e[1;41mInstallation aborted\e[0m"
             exit
             ;;
-        *) echo "invalid option $REPLY";;
+        *) echo -e "\e[1;41minvalid option $REPLY\e[0m";;
     esac
 done
 echo ""
