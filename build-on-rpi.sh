@@ -160,7 +160,7 @@ echo -e "\n\e[1;33mBuild started, please wait a moment (10-15 mins).\e[0m"
 yarn gitconfig &>> ${LOG}
 
 # Start yarn setup and send it to the background.
-yarn setup &>> ${LOG} &
+(yarn setup ; kill $(pidof node)) &>> ${LOG} &
 # Keep checking if the process is running. And keep a count.
 {
         i="0"
