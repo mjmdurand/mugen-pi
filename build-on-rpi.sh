@@ -4,7 +4,7 @@ MUGEN_PI_DIR=$PWD
 KARAOKE_MUGEN_DIR=~/karaokemugen-app
 SONG_DIR=~/songs-karaokemugen
 MPVREQUIRED=0.32.0-1
-LOG = $PWD/log.txt
+LOG=$PWD/log.txt
 
 #Welcome message
 clear
