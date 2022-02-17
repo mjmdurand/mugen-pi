@@ -132,6 +132,9 @@ echo -e "\n\e[1;34mBuilding Karaoke Mugen.\e[0m\n\e[1;41mThis operation will tak
 read -n 1 -s -r -p "Press any key to continue."
 yarn gitconfig
 yarn setup
+
+# Editing mpv required version at launch 0.33 > 0.32
+sed -i "s/MPVVersion = '>=0.33.0'/MPVVersion = '>=0.32.0'/g" ~/karaokemugen-app/src/utils/constants.ts
 echo -e "\e[1;34mBuild done.\e[0m"
 
 # creating external song folder
