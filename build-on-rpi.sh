@@ -148,14 +148,14 @@ yarn setup &>> ${LOG} &
             proc=$(ps aux | grep -v grep | grep -e "node")
             if [[ "$proc" == "" ]]; then break; fi
             # Sleep for a longer period if the build is long
-            sleep 1
+            sleep 6
             echo $i
             i=$(expr $i + 1)
         done
         # If it is done then display 100%
         echo 100
         # Give it some time to display the progress to the user.
-        sleep 6
+        sleep 2
 } | whiptail --title "Building Karaoke Mugen" --gauge "Building FrontEnd and BackEnd" 8 78 0
 
 
