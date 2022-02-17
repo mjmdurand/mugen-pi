@@ -360,9 +360,7 @@ sort=mtime;ascending;
 show_documents=0
 show_trash=1
 show_mounts=1' > ~/.config/pcmanfm/LXDE-pi/desktop-items-0.conf
-
-echo -e "\e[1;33mdesktop-items-0.conf created.\e[0m"
-echo -e "\e[1;32mDone.\e[0m"
+echo -e "\e[1;32mdesktop-items-0.conf created.\e[0m"
 
 #Finish installation
 echo -e "\n\e[1;44mFinish installation.\e[0m"
@@ -372,6 +370,13 @@ versions=("yes" "no")
 select fav in "${versions[@]}"; do
     case $fav in
         "yes")
+            echo ""
+            echo " _  __                  _         __  __"
+            echo "| |/ /__ _ _ _ __ _ ___| |_____  |  \\/  |_  _ __ _ ___ _ _"
+            echo "| ' </ _\` | '_/ _\` / _ \\ / / -_) | |\\/| | || / _\` / -_) ' \\"
+            echo "|_|\\_\\__,_|_| \\__,_\\___/_\\_\\___| |_|  |_|\\_,_\\__, \\___|_||_|"
+            echo "                                             |___/"
+            echo ""
             echo -e "\n\e[1;32mInstallation finished, you can check log.txt if you have any issues to launch Karaoke Mugen.\e[0m"
             echo -e "\e[1;41mSystem is gonna restart in 10 seconds.\e[0m"
             sleep 10
@@ -379,6 +384,13 @@ select fav in "${versions[@]}"; do
             break
             ;;
         "no")
+            echo ""
+            echo " _  __                  _         __  __"
+            echo "| |/ /__ _ _ _ __ _ ___| |_____  |  \\/  |_  _ __ _ ___ _ _"
+            echo "| ' </ _\` | '_/ _\` / _ \\ / / -_) | |\\/| | || / _\` / -_) ' \\"
+            echo "|_|\\_\\__,_|_| \\__,_\\___/_\\_\\___| |_|  |_|\\_,_\\__, \\___|_||_|"
+            echo "                                             |___/"
+            echo ""
             echo -e "\n\e[1;32mInstallation finished, you can check log.txt if you have any issues to launch Karaoke Mugen.\e[0m"
             echo -e "\e[1;41mYou need to restart or logout to finish the installation.\e[0m"
             break
