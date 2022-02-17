@@ -99,8 +99,8 @@ echo -e "\e[1;32mSources successfully downloaded.\e[0m"
 #Port Forwarding
 echo -e "\n\e[1;34mPort Forwarding (80 > 1337).\e[0m\n\e[1;41mChoose \"YES\" on next screens (save IPv4/IPv6 rules)\e[0m"
 read -n 1 -s -r -p "Press any key to continue."
-sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 1337
 sudo apt install -yq iptables-persistent
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 1337
 
 # setting postgresql database
 echo -e "\n\e[1;34mCreating Postegresql database, user and grant privileges.\e[0m"
