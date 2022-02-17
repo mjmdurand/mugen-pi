@@ -54,20 +54,20 @@ select fav in "${versions[@]}"; do
     case $fav in
         "Latest")
             VERSION_TO_INSTALL=$fav
-            echo -e "\n\e[41mCurrent \e[0m\e[1;33mversion will be installed.\e[0m\n\e[41m/!\ \e[0m \e[1;41mYou may have some bugs by installing this version \e[0m\e[41m/!\ \e[0m"
+            echo -e "\n\e[1;41mCurrent\e[0m\e[1;33m version will be installed.\e[0m\n\e[1;41m /!\ /\e[0m \e[1;41m You may have some bugs by installing this version\e[0m \e[41m /!\ \e[0m"
             read -n 1 -s -r -p "Press any key to continue."
             break
             ;;
         "Next")
             VERSION_TO_INSTALL=$fav
-            echo -e "\n\e[41mNext \e[0m\e[1;33mversion will be installed.\e[0m\n\e[41m/!\ \e[0m \e[1;41mYou may have some bugs by installing this version \e[0m\e[41m/!\ \e[0m"
+            echo -e "\n\e[1;41mNext \e[0m\e[1;33m version will be installed.\e[0m\n\e[1;41m /!\ \e[0m \e[1;41m You may have some bugs by installing this version\e[0m \e[41m /!\ \e[0m"
             read -n 1 -s -r -p "Press any key to continue."
             break
             ;;
         "5.0.37")
             VERSION_TO_INSTALL=$fav
             HASH_COMMIT=ec2577cc
-            echo -e "\n\e[41mCurrent \e[0m\e[1;33m $fav will be installed\e[0m"
+            echo -e "\n\e[1;41mCurrent \e[0m\e[1;33m $fav will be installed\e[0m"
 	        break
             ;;
         "Quit")
