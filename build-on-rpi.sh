@@ -390,7 +390,6 @@ versions=("yes" "no")
 select fav in "${versions[@]}"; do
     case $fav in
         "yes")
-            echo "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
             echo " _  __                  _         __  __"
             echo "| |/ /__ _ _ _ __ _ ___| |_____  |  \\/  |_  _ __ _ ___ _ _"
             echo "| ' </ _\` | '_/ _\` / _ \\ / / -_) | |\\/| | || / _\` / -_) ' \\"
@@ -405,7 +404,6 @@ select fav in "${versions[@]}"; do
             break
             ;;
         "no")
-            echo "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
             echo " _  __                  _         __  __"
             echo "| |/ /__ _ _ _ __ _ ___| |_____  |  \\/  |_  _ __ _ ___ _ _"
             echo "| ' </ _\` | '_/ _\` / _ \\ / / -_) | |\\/| | || / _\` / -_) ' \\"
