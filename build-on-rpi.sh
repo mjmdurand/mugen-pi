@@ -15,7 +15,7 @@ echo "| ' </ _\` | '_/ _\` / _ \\ / / -_) | |\\/| | || / _\` / -_) ' \\"
 echo "|_|\\_\\__,_|_| \\__,_\\___/_\\_\\___| |_|  |_|\\_,_\\__, \\___|_||_|"
 echo "                                             |___/"
 echo ""
-echo -e "\e[1;44mWelcome to Karaoke Mugen Installer\e[0m\n\n\e[1;33m/!\ It's recommanded to run this script under a wired connection.\nIf the installation fail, just launch the script once again\e[0m\n"
+echo -e "\e[1;44mWelcome to Karaoke Mugen Installer\e[0m\n\e[1;33m/!\ It's recommanded to run this script under a wired connection.\nIf the installation fail, just launch the script once again\e[0m\n"
 sleep 5
 
 # update system and install softwares
@@ -36,19 +36,20 @@ echo -e "\n\e[1;44mCheking MPV version.\e[0m"
 MPVVERS=`dpkg -s mpv | grep Version | cut -c10-`
 MPVTEST=`dpkg --compare-versions ${MPVVERS} ge ${MPVREQUIRED} && echo true || echo false`
 if [ ${MPVTEST} = false ];then
-echo -e "\e[1;41mYour MPV version is too old.\e[0m"
-echo -e "\e[1;41mKaraoke Mugen v5.0.37 will be installed.\e[0m"
+echo -e "\e[1;31mYour MPV version is too old.\e[0m"
+echo -e "\e[1;33mKaraoke Mugen v5.0.37 will be installed.\e[0m"
 MPVCHECK=false
 HASH_COMMIT=ec2577cc
 VERSION_TO_INSTALL=5.0.37
 else
 MPVCHECK=true
-echo -e "\e[1;33mYour MPV version is accepted.\e[0m"
+echo -e "\e[1;32mYour MPV version is accepted.\e[0m"
 fi
 
 #if mpv version is > 0.32, user can choose version to install
+echo -e "\n\e[1;44mSelect Karaoke Mugen version.\e[0m"
 if [ ${MPVCHECK} = true ];then
-PS3='Choose the version to install : '
+PS3='Version to install (1,2,3 or 4) : '
 versions=("Latest" "Next" "5.0.37" "Quit")
 select fav in "${versions[@]}"; do
     case $fav in
