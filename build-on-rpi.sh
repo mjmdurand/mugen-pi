@@ -137,7 +137,29 @@ echo -e "\n\e[1;44mBuild Karaoke Mugen.\e[0m\n\e[1;41mThis operation will take t
 read -n 1 -s -r -p "Understood ! (press any key to continue)."
 echo -e "\n\e[1;33mBuild started, please wait a moment (10-15 mins).\e[0m"
 yarn gitconfig &>> ${LOG}
-yarn setup &>> ${LOG}
+
+# Start yarn setup and send it to the background.
+yarn setup &>> ${LOG} &
+# Keep checking if the process is running. And keep a count.
+{
+        i="0"
+        while (true)
+        do
+            proc=$(ps aux | grep -v grep | grep -e "node")
+            if [[ "$proc" == "" ]]; then break; fi
+            # Sleep for a longer period if the build is long
+            sleep 1
+            echo $i
+            i=$(expr $i + 1)
+        done
+        # If it is done then display 100%
+        echo 100
+        # Give it some time to display the progress to the user.
+        sleep 6
+} | whiptail --title "Building Karaoke Mugen" --gauge "Building FrontEnd and BackEnd" 8 78 0
+
+
+
 
 # Editing mpv required version at launch 0.33 > 0.32
 sed -i "s/MPVVersion = '>=0.33.0'/MPVVersion = '>=0.32.0'/g" ~/karaokemugen-app/src/utils/constants.ts
