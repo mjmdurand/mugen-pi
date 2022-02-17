@@ -15,15 +15,15 @@ echo "| ' </ _\` | '_/ _\` / _ \\ / / -_) | |\\/| | || / _\` / -_) ' \\"
 echo "|_|\\_\\__,_|_| \\__,_\\___/_\\_\\___| |_|  |_|\\_,_\\__, \\___|_||_|"
 echo "                                             |___/"
 echo ""
-echo -e "\e[1;34mWelcome to Karaoke Mugen Installer\e[0m\n\n\e[1;33m/!\ It's recommanded to run this script under a wired connection.\nIf the installation fail, just launch the script once again\e[0m\n"
+echo -e "\e[44mWelcome to Karaoke Mugen Installer\e[0m\n\n\e[1;33m/!\ It's recommanded to run this script under a wired connection.\nIf the installation fail, just launch the script once again\e[0m\n"
 sleep 5
 
 # update system and install softwares
-echo -e "\e[1;34mUpdating the system.\e[0m"
+echo -e "\e[44mUpdating the system.\e[0m"
 sudo apt update -q &> ${LOG} && sudo apt upgrade -yq &> ${LOG}
 echo -e "\e[1;32mSystem updated.\e[0m"
 
-echo -e "\n\e[1;34mInstalling required software.\e[0m"
+echo -e "\n\e[44mInstalling required software.\e[0m"
 # adding nodejs 14.x repositories
 curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - &>> ${LOG}
 sudo apt install -yq nodejs mpv ffmpeg postgresql libpq-dev postgresql-client postgresql-client-common git &>> ${LOG}
@@ -32,7 +32,7 @@ sudo apt autoremove -yq &>> ${LOG}
 echo -e "\e[1;32mRequired software installation done.\e[0m"
 
 #checking mpv version
-echo -e "\n\e[1;34mCheking MPV version.\e[0m"
+echo -e "\n\e[44mCheking MPV version.\e[0m"
 MPVVERS=`dpkg -s mpv | grep Version | cut -c10-`
 MPVTEST=`dpkg --compare-versions ${MPVVERS} ge ${MPVREQUIRED} && echo true || echo false`
 if [ ${MPVTEST} = false ];then
@@ -54,13 +54,13 @@ select fav in "${versions[@]}"; do
     case $fav in
         "Latest")
             VERSION_TO_INSTALL=$fav
-            echo -e "\n\e[1;34mCurrent version will be installed.\e[0m\n\e[1;33m/!\ You may have some bugs by installing this version\e[0m"
+            echo -e "\n\e[44mCurrent version will be installed.\e[0m\n\e[1;33m/!\ You may have some bugs by installing this version\e[0m"
             read -n 1 -s -r -p "Press any key to continue."
             break
             ;;
         "Next")
             VERSION_TO_INSTALL=$fav
-            echo -e "\n\e[1;34mNext version will be installed.\e[0m\n\e[1;33m/!\ You may have some bugs by installing this version\e[0m"
+            echo -e "\n\e[44mNext version will be installed.\e[0m\n\e[1;33m/!\ You may have some bugs by installing this version\e[0m"
             read -n 1 -s -r -p "Press any key to continue."
             break
             ;;
@@ -84,9 +84,9 @@ fi
 cd ~
 
 #downloading  karaoke mugen
-echo -e "\n\e[1;34mDownloading Karaoke Mugen sources.\e[0m"
+echo -e "\n\e[44mDownloading Karaoke Mugen sources.\e[0m"
 if [ -d ${KARAOKE_MUGEN_DIR} ];then
-echo -e "\e[41mkaraokemugen-app folder already exist. Old version will be removed.\e[0m"
+echo -e "\e[1;41mmkaraokemugen-app folder already exist. Old version will be removed.\e[0m"
 sudo rm -R ${KARAOKE_MUGEN_DIR}
 echo -e "\e[1;33mkaraokemugen-app folder removed.\e[0m"
 fi
@@ -106,13 +106,13 @@ fi
 echo -e "\e[1;32mSources successfully downloaded.\e[0m"
 
 #Port Forwarding
-echo -e "\n\e[1;34mPort Forwarding (80 > 1337).\e[0m\n\e[1;41mChoose \"YES\" on next screens (save IPv4/IPv6 rules) if you never installed IPTABLES\e[0m"
+echo -e "\n\e[44mPort Forwarding (80 > 1337).\e[0m\n\e[1;41mChoose \"YES\" on next screens (save IPv4/IPv6 rules) if you never installed IPTABLES\e[0m"
 read -n 1 -s -r -p "Understood ! (press any key to continue)."
 sudo apt install -yq iptables-persistent 
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 1337
 
 # setting postgresql database
-echo -e "\n\e[1;34mCreating Postegresql database, user and grant privileges.\e[0m"
+echo -e "\n\e[44mCreating Postegresql database, user and grant privileges.\e[0m"
 sudo service postgresql start
 sudo -u postgres psql -c "DROP DATABASE IF EXISTS karaokemugen_app;"
 sudo -u postgres psql -c "CREATE DATABASE karaokemugen_app ENCODING 'UTF8';"
@@ -125,13 +125,13 @@ echo -e "\e[1;32mDatabase successfully configured.\e[0m"
 
 # editing package.json file (sentry/cli not supported on raspi atm)
 echo ""
-echo -e "\n\e[1;34mRemoving Sentry/cli package due to incompatibility.\e[0m"
+echo -e "\n\e[44mRemoving Sentry/cli package due to incompatibility.\e[0m"
 cd ${KARAOKE_MUGEN_DIR}
 sed -i '/sentry\/cli/d' package.json
 echo -e "\e[1;32mPackage list updated.\e[0m"
 
 # build karaoke mugen
-echo -e "\n\e[1;34mBuild Karaoke Mugen.\e[0m\n\e[1;41mThis operation will take time and terminal may crash if you use wifi connexion\e[0m"
+echo -e "\n\e[44mBuild Karaoke Mugen.\e[0m\n\e[1;41mThis operation will take time and terminal may crash if you use wifi connexion\e[0m"
 read -n 1 -s -r -p "Understood ! (press any key to continue)."
 echo -e "\n\e[1;33mBuild started, please wait a moment (5-10 mins).\e[0m"
 yarn gitconfig &>> ${LOG}
@@ -142,7 +142,7 @@ sed -i "s/MPVVersion = '>=0.33.0'/MPVVersion = '>=0.32.0'/g" ~/karaokemugen-app/
 echo -e "\e[1;32mBuild done.\e[0m"
 
 # creating external song folder
-echo -e "\n\e[1;34mCreating song folders.\e[0m"
+echo -e "\n\e[44mCreating song folders.\e[0m"
 if [ ! -d ${SONG_DIR} ];then
 echo -e "\e[1;33mSong folder not found, creating it\e[0m"
 mkdir ${SONG_DIR}
@@ -210,11 +210,11 @@ ln -s ${SONG_DIR}/lyrics ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/lyrics
 ln -s ${SONG_DIR}/medias ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias
 ln -s ${SONG_DIR}/tags ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/tags
 echo -e "\e[1;32mDone.\e[0m"
-echo -e "\n\e[1;34mSong folder will be located here ${SONG_DIR}\e[0m\n\e[1;41mPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)\e[0m"
+echo -e "\n\e[44mSong folder will be located here ${SONG_DIR}\e[0m\n\e[1;41mPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)\e[0m"
 read -n 1 -s -r -p "Understood ! (press any key to continue)."
 
 #Generating KM configuration
-echo -e "\n\e[1;34mGenerating Karaoke Mugen configuration.\e[0m"
+echo -e "\n\e[44mGenerating Karaoke Mugen configuration.\e[0m"
 if [ ! -f "${KARAOKE_MUGEN_DIR}/config.yml" ];then
 echo "
 System:
@@ -234,7 +234,7 @@ echo -e "\e[1;32mConfiguration file generated.\e[0m"
 
 
 #Desktop shortcut
-echo -e "\n\e[1;34mCreating desktop shortcut.\e[0m"
+echo -e "\n\e[44mCreating desktop shortcut.\e[0m"
 if [ ! -f ~/Desktop/karaokeMugen.desktop ];then
 echo '[Desktop Entry]
 Name=Karaoke Mugen
@@ -251,7 +251,7 @@ echo ""
 fi
 
 #Desktop update shortcut
-echo -e "\e[1;34mCreating update desktop shortcut.\e[0m"
+echo -e "\e[44mCreating update desktop shortcut.\e[0m"
 if [ ! -f ~/Desktop/karaokeMugenUpdate.desktop ];then
 echo '[Desktop Entry]
 Name=Karaoke Mugen Update
@@ -268,7 +268,7 @@ echo ""
 fi
 
 #Edit filemanager to avoid "open in terminal" window
-echo -e "\n\e[1;34mEdit filemanager to avoid \"open in terminal\" window.\e[0m"
+echo -e "\n\e[44mEdit filemanager to avoid \"open in terminal\" window.\e[0m"
 if [ ! -d ~/.config/libfm ];then
 echo -e "\e[1;33mlibfm folder not found, creating it\e[0m"
 mkdir ~/.config/libfm/
@@ -336,7 +336,7 @@ fi
 echo -e "\e[1;32mDone.\e[0m"
 
 #Wallpaper
-echo -e "\n\e[1;34mUpdating wallpaper.\e[0m"
+echo -e "\n\e[44mUpdating wallpaper.\e[0m"
 if [ ! -d ~/.config/pcmanfm ];then
 mkdir ~/.config/pcmanfm/
 echo -e "\e[1;33mpcmanfm created.\e[0m"
