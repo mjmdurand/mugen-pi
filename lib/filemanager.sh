@@ -1,5 +1,4 @@
 #!/bin/bash -e
-
 #Edit filemanager to avoid "open in terminal" window
 echo -e "\n\e[1;44mEdit filemanager to avoid \"open in terminal\" window.\e[0m"
 if [ ! -d ~/.config/libfm ];then

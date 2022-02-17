@@ -1,5 +1,4 @@
 #!/bin/bash -e
-
 #Desktop launch shortcut
 echo -e "\n\e[1;44mCreating launch desktop shortcut.\e[0m"
 if [ ! -f ~/Desktop/karaokeMugen.desktop ];then

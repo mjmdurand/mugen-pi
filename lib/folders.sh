@@ -1,5 +1,4 @@
 #!/bin/bash -e
-
 CUSTOM_SONG_DIR=$(whiptail --title "Karaoke Mugen installation" --inputbox "Please the path you want to use" 10 75 ${SONG_DIR} 3>&1 1>&2 2>&3)
 SONG_DIR=CUSTOM_SONG_DIR
 

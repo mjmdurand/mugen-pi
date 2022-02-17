@@ -1,5 +1,4 @@
 #!/bin/bash -e
-
 # update system and install softwares
 echo -e "\e[1;44mUpdating the system.\e[0m"
 sudo apt update -q &> ${LOG} && sudo apt upgrade -yq &> ${LOG}

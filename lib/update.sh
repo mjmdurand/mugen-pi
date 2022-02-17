@@ -1,5 +1,4 @@
 #!/bin/bash -e
-
 #Desktop update shortcut
 echo -e "\n\e[1;44mCreating update desktop shortcut.\e[0m"
 if [ ! -f ~/Desktop/karaokeMugenUpdate.desktop ];then

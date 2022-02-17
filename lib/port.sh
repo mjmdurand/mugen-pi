@@ -1,5 +1,4 @@
 #!/bin/bash -e
-
 #Port Forwarding
 echo -e "\n\e[1;44mPort Forwarding (80 > 1337).\e[0m"
 echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections &>> ${LOG}

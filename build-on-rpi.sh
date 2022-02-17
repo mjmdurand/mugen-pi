@@ -19,7 +19,7 @@ echo -e "\e[1;44mWelcome to Karaoke Mugen Installer\e[0m\n\e[1;33m/!\ It's recom
 sleep 5
 
 # select parameters
-CHOICES=$(whiptail --title "Karaoke Mugen installation" --separate-output --checklist "Choose componements to install" 20 75 5 \
+CHOICES=$(whiptail --title "Karaoke Mugen installation" --separate-output --checklist "Choose componements to install" 20 75 7 \
   "Core" "The KM app with all dependancies" ON \
   "Launch" "Launch KM with a desktop shortcut" ON \
   "Update" "Update KM with a desktop shortcut" ON \

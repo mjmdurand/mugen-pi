@@ -1,5 +1,4 @@
 #!/bin/bash -e
-
 #Wallpaper
 echo -e "\n\e[1;44mUpdating wallpaper.\e[0m"
 if [ ! -d ~/.config/pcmanfm ];then
