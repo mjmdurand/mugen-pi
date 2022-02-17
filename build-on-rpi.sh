@@ -22,30 +22,31 @@ echo -e "\e[1;34mUpdating the system.\e[0m"
 sudo apt update -q && sudo apt upgrade -yq
 echo -e "\e[1;32mSystem updated.\e[0m"
 
-echo -e "\e[1;34mInstalling required software.\e[0m"
+echo -e "\n\e[1;34mInstalling required software.\e[0m"
 # adding nodejs 14.x repositories
 curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
 sudo apt install -yq nodejs mpv ffmpeg postgresql libpq-dev postgresql-client postgresql-client-common git
 sudo npm install -g yarn
 sudo apt autoremove -yq
-echo -e "\e[1;32mInstallation done.\e[0m"
+echo -e "\e[1;32mRequired software installation done.\e[0m"
 
 #checking mpv version
+echo -e "\n\e[1;34mCheking MPV version.\e[0m"
 MPVVERS=`dpkg -s mpv | grep Version | cut -c10-`
 MPVTEST=`dpkg --compare-versions ${MPVVERS} ge ${MPVREQUIRED} && echo true || echo false`
 if [ ${MPVTEST} = false ];then
-echo -e "\e[1;41mThe installed MPV version is too old.\e[0m"
+echo -e "\e[1;41mYour MPV version is too old.\e[0m"
 echo -e "\e[1;41mKaraoke Mugen v5.0.37 will be installed.\e[0m"
 MPVCHECK=false
 HASH_COMMIT=ec2577cc
 VERSION_TO_INSTALL=5.0.37
 else
 MPVCHECK=true
-echo -e "\e[1;33mThe installed MPV version is accepted.\e[0m"
+echo -e "\e[1;33mYour MPV version is accepted.\e[0m"
 fi
 
 #if mpv version is > 0.32, user can choose version to install
-if [ "${MPVCHECK}" = true ];then
+if [ ${MPVCHECK} = true ];then
 PS3='Choose the version to install : '
 versions=("Latest" "Next" "5.0.37" "Quit")
 select fav in "${versions[@]}"; do
@@ -83,16 +84,16 @@ cd ~
 
 #downloading  karaoke mugen
 echo -e "\n\e[1;34mDownloading Karaoke Mugen sources.\e[0m"
-if [ -d "${KARAOKE_MUGEN_DIR}" ];then
+if [ -d ${KARAOKE_MUGEN_DIR} ];then
 echo -e "\e[41mkaraokemugen-app folder already exist. Old version will be removed.\e[0m"
 sudo rm -R ${KARAOKE_MUGEN_DIR}
 echo -e "\e[1;33mkaraokemugen-app folder removed.\e[0m"
 fi
 
-if [ "${VERSION_TO_INSTALL}" = "Latest" ];then
+if [ ${VERSION_TO_INSTALL} = "Latest" ];then
 echo -e "\e[1;33mDownloading Latest version\e[0m"
 git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git
-elif [ "${VERSION_TO_INSTALL}" = "Next" ];then
+elif [ ${VERSION_TO_INSTALL} = "Next" ];then
 echo -e "\e[1;33mDownloading Next version\e[0m"
 git clone --recursive --branch next https://gitlab.com/karaokemugen/karaokemugen-app.git
 else
@@ -104,12 +105,14 @@ fi
 echo -e "\e[1;32mSources successfully downloaded.\e[0m"
 
 #Port Forwarding
-echo -e "\n\e[1;34mPort Forwarding (80 > 1337).\e[0m\n\e[1;41mChoose \"YES\" on next screens (save IPv4/IPv6 rules)\e[0m"
-read -n 1 -s -r -p "Press any key to continue."
+echo ""
+echo -e "\n\e[1;34mPort Forwarding (80 > 1337).\e[0m\n\e[1;41mChoose \"YES\" on next screens (save IPv4/IPv6 rules) if you never installed IPTABLES\e[0m"
+read -n 1 -s -r -p "Understood ! (press any key to continue)."
 sudo apt install -yq iptables-persistent
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 1337
 
 # setting postgresql database
+echo ""
 echo -e "\n\e[1;34mCreating Postegresql database, user and grant privileges.\e[0m"
 sudo service postgresql start
 sudo -u postgres psql -c "DROP DATABASE IF EXISTS karaokemugen_app;"
@@ -122,6 +125,7 @@ sudo -u postgres psql -c "CREATE EXTENSION pgcrypto;" -d karaokemugen_app
 echo -e "\e[1;32mDatabase successfully configured.\e[0m"
 
 # editing package.json file (sentry/cli not supported on raspi atm)
+echo ""
 echo -e "\n\e[1;34mRemoving Sentry/cli package due to incompatibility.\e[0m"
 cd ${KARAOKE_MUGEN_DIR}
 sed -i '/sentry\/cli/d' package.json
@@ -129,7 +133,7 @@ echo -e "\e[1;32mPackage list updated.\e[0m"
 
 # build karaoke mugen
 echo -e "\n\e[1;34mBuilding Karaoke Mugen.\e[0m\n\e[1;41mThis operation will take time and terminal may crash if you use wifi connexion\e[0m"
-read -n 1 -s -r -p "Press any key to continue."
+read -n 1 -s -r -p "Understood ! (press any key to continue)."
 yarn gitconfig
 yarn setup
 
@@ -139,57 +143,75 @@ echo -e "\e[1;34mBuild done.\e[0m"
 
 # creating external song folder
 echo -e "\n\e[1;34mCreating song folder.\e[0m"
-if [ ! -d "${SONG_DIR}" ];then
+if [ ! -d ${SONG_DIR} ];then
 echo -e "\e[1;33mSong folder not found, creating it\e[0m"
 mkdir ${SONG_DIR}
+else
+echo -e "\e[1;33mSong folder found, skipping\e[0m"
 fi
 
-if [ ! -d "${SONG_DIR}/karaokes" ];then
+if [ ! -d ${SONG_DIR}/karaokes ];then
 echo -e "\e[1;33mKaraoke folder not found, creating it\e[0m"
 mkdir ${SONG_DIR}/karaokes
+else
+echo -e "\e[1;33mKaraoke folder found, skipping\e[0m"
 fi
 
-if [ ! -d "${SONG_DIR}/lyrics" ];then
+if [ ! -d ${SONG_DIR}/lyrics ];then
 echo -e "\e[1;33mLyrics folder not found, creating it\e[0m"
 mkdir ${SONG_DIR}/lyrics
+else
+echo -e "\e[1;33mLyrics folder found, skipping\e[0m"
 fi
 
-if [ ! -d "${SONG_DIR}/medias" ];then
+if [ ! -d ${SONG_DIR}/medias ];then
 echo -e "\e[1;33mMedia folder not found, creating it\e[0m"
 mkdir ${SONG_DIR}/medias
+else
+echo -e "\e[1;33mMedia folder found, skipping\e[0m"
 fi
 
-if [ ! -d "${SONG_DIR}/tags" ];then
+if [ ! -d ${SONG_DIR}/tags ];then
 echo -e "\e[1;33mTags folder not found, creating it\e[0m"
 mkdir ${SONG_DIR}/tags
+else
+echo -e "\e[1;33mTags folder found, skipping\e[0m"
 fi
 
 #creating songs folder in KM folder
-if [ ! -d "${KARAOKE_MUGEN_DIR}/app" ];then
+if [ ! -d ${KARAOKE_MUGEN_DIR}/app ];then
 echo -e "\e[1;33mApp folder not found, creating it\e[0m"
 mkdir ${KARAOKE_MUGEN_DIR}/app
+else
+echo -e "\e[1;33mApp folder found, skipping\e[0m"
 fi
 
-if [ ! -d "${KARAOKE_MUGEN_DIR}/app/repos" ];then
+if [ ! -d ${KARAOKE_MUGEN_DIR}/app/repos ];then
 echo -e "\e[1;33mRepos folder not found, creating it\e[0m"
 mkdir ${KARAOKE_MUGEN_DIR}/app/repos
+else
+echo -e "\e[1;33mRepos folder found, skipping\e[0m"
 fi
 
-if [ ! -d "${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/" ];then
+if [ ! -d ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/ ];then
 echo -e "\e[1;33mKara.moe folder not found, creating it\e[0m"
 mkdir ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/
 else
 echo -e "\e[1;33mKara.moe folder found, removing it.\e[0m"
+read -n 1 -s -r -p "If you have old downloads inside, please move them now in ${SONG_DIR} (press any key to continue)."
 sudo rm -r ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/
 mkdir ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/
 fi
 
 #Creating sym links
+echo -e "\e[1;33mCreating SymLinks\e[0m"
 ln -s ${SONG_DIR}/karaokes ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/karaokes
 ln -s ${SONG_DIR}/lyrics ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/lyrics
 ln -s ${SONG_DIR}/medias ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias
 ln -s ${SONG_DIR}/tags ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/tags
 echo -e "\e[1;32mDone.\e[0m"
+echo -e "\e[1;33mSong folder will be located here ${SONG_DIR}\e[0m\n\e[1;41mPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)\e[0m"
+read -n 1 -s -r -p "Understood ! (press any key to continue)."
 
 #Generating KM configuration
 echo -e "\n\e[1;34mGenerating Karaoke Mugen configuration.\e[0m"
@@ -213,7 +235,7 @@ echo -e "\e[1;32mConfiguration file generated.\e[0m"
 
 #Desktop shortcut
 echo -e "\e[1;34mCreating desktop shortcut.\e[0m"
-if [ ! -f "~/Desktop/karaokeMugen.desktop" ];then
+if [ ! -f ~/Desktop/karaokeMugen.desktop ];then
 echo '[Desktop Entry]
 Name=Karaoke Mugen
 Comment=Launch Karaoke Mugen
@@ -230,7 +252,7 @@ fi
 
 #Desktop update shortcut
 echo -e "\e[1;34mCreating update desktop shortcut.\e[0m"
-if [ ! -f "~/Desktop/karaokeMugenUpdate.desktop" ];then
+if [ ! -f ~/Desktop/karaokeMugenUpdate.desktop ];then
 echo '[Desktop Entry]
 Name=Karaoke Mugen Update
 Comment=Update Karaoke Mugen
@@ -246,12 +268,15 @@ echo ""
 fi
 
 #Edit filemanager to avoid "open in terminal" window
-if [ ! -d "~/.config/libfm" ];then
+if [ ! -d ~/.config/libfm ];then
 echo -e "\e[1;33mlibfm folder not found, creating it\e[0m"
 mkdir ~/.config/libfm/
+else
+echo -e "\e[1;33mlibfm folder found, skipping.\e[0m"
 fi
 
-if [ ! -f "~/.config/libfm/libfm.conf" ];then
+
+if [ ! -f ~/.config/libfm/libfm.conf ];then
 echo -e "\e[1;33mGenerating libfm.conf\e[0m"
 echo "# Configuration file for the libfm version 1.3.1.
 # Autogenerated file, don't edit, your changes will be overwritten.
@@ -341,4 +366,4 @@ echo -e "\n\e[1;32mDone.\e[0m"
 
 #Finish installation
 read -n 1 -s -r -p "Press any key to reboot and finish installation"
-sudo reboot
+#sudo reboot
