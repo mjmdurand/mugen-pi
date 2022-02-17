@@ -406,37 +406,21 @@ echo -e "\e[1;32mdesktop-items-0.conf created.\e[0m"
 #Finish installation
 echo -e "\n\e[1;44mFinish installation.\e[0m"
 echo -e "\e[1;33mYou need to restart to apply all changes (wallpaper, filemanager, shortcuts).\e[0m"
-PS3='Restart now ? '
-versions=("yes" "no")
-select fav in "${versions[@]}"; do
-    case $fav in
-        "yes")
-            echo " _  __                  _         __  __"
-            echo "| |/ /__ _ _ _ __ _ ___| |_____  |  \\/  |_  _ __ _ ___ _ _"
-            echo "| ' </ _\` | '_/ _\` / _ \\ / / -_) | |\\/| | || / _\` / -_) ' \\"
-            echo "|_|\\_\\__,_|_| \\__,_\\___/_\\_\\___| |_|  |_|\\_,_\\__, \\___|_||_|"
-            echo "                                             |___/"
-            echo ""
-            echo -e "\n\e[1;44mSong folder will be located here ${SONG_DIR}\e[0m\n\e[1;41mPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)\e[0m"
-            echo -e "\n\e[1;32mInstallation finished, you can check log.txt if you have any issues to launch Karaoke Mugen.\e[0m"
-            echo -e "\e[1;41mSystem is gonna restart in 10 seconds.\e[0m"
-            sleep 10
-            sudo reboot
-            break
-            ;;
-        "no")
-            echo " _  __                  _         __  __"
-            echo "| |/ /__ _ _ _ __ _ ___| |_____  |  \\/  |_  _ __ _ ___ _ _"
-            echo "| ' </ _\` | '_/ _\` / _ \\ / / -_) | |\\/| | || / _\` / -_) ' \\"
-            echo "|_|\\_\\__,_|_| \\__,_\\___/_\\_\\___| |_|  |_|\\_,_\\__, \\___|_||_|"
-            echo "                                             |___/"
-            echo ""
-            echo -e "\n\e[1;44mSong folder will be located here ${SONG_DIR}\e[0m\n\e[1;41mPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)\e[0m"
-            echo -e "\n\e[1;32mInstallation finished, you can check log.txt if you have any issues to launch Karaoke Mugen.\e[0m"
-            echo -e "\e[1;41mYou need to restart or logout to finish the installation.\e[0m"
-            break
-            ;;
-        *) echo -e "\e[1;41minvalid option $REPLY\e[0m";;
-    esac
-done
+echo -e "\n\e[1;44mSong folder will be located here ${SONG_DIR}\e[0m\n\e[1;41mPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)\e[0m"
+echo -e "\n\e[1;32mInstallation finished, you can check log.txt if you have any issues to launch Karaoke Mugen.\e[0m"
+
+# Display ending informations
+whiptail --title "Karaoke Mugen installation" --msgbox "Installation finished, you can check log.txt if you have any issues to launch Karaoke Mugen." 15 60
+
+# Display folder locations
+whiptail --title "Karaoke Mugen installation" --msgbox "Song folder will be located here : \n${SONG_DIR} \n\nPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)" 15 60
+
+# prompt for restart
+if (whiptail --title "Karaoke Mugen installation" --yesno "Do you want to restart now to finish installation  ?" 15 60) then
+	
+    sudo reboot
+else
+	whiptail --title "Karaoke Mugen installation" --msgbox "You'll need to restart or logout to finish the installation." 15 60
+fi
+
 
