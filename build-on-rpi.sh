@@ -60,22 +60,18 @@ if [ ${MPVCHECK} = true ];then
             1)
                 VERSION_TO_INSTALL="Latest"
                 echo -e "\n\e[1;33mLatest\e[0m\e[33m version will be installed.\e[0m\n\e[1;41m /!\ /\e[0m \e[1;41m You may have some bugs by installing this version\e[0m \e[1;41m /!\ \e[0m"
-                break
                 ;;
             2)
                 VERSION_TO_INSTALL="Next"
                 echo -e "\n\e[1;33mNext\e[0m\e[33m version will be installed.\e[0m\n\e[1;41m /!\ /\e[0m \e[1;41m You may have some bugs by installing this version\e[0m \e[1;41m /!\ \e[0m"
-                break
                 ;;
             3)
                 VERSION_TO_INSTALL="5.0.37"
                 HASH_COMMIT=ec2577cc
                 echo -e "\n\e[1;33mVersion 5.0.37\e[0m\e[33m will be installed\e[0m"
-                break
                 ;;
             *)
                 echo -e "\n\e[1;33mCurrent\e[0m\e[33m version will be installed.\e[0m\n\e[1;41m /!\ /\e[0m \e[1;41m You may have some bugs by installing this version\e[0m \e[1;41m /!\ \e[0m"
-                break
                 ;;
         esac
     fi
