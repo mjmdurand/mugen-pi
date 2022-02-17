@@ -7,6 +7,13 @@ MPVREQUIRED=0.32.0-1
 
 #Welcome message
 clear
+echo ""
+echo " _  __                  _         __  __"
+echo "| |/ /__ _ _ _ __ _ ___| |_____  |  \\/  |_  _ __ _ ___ _ _"
+echo "| ' </ _\` | '_/ _\` / _ \\ / / -_) | |\\/| | || / _\` / -_) ' \\"
+echo "|_|\\_\\__,_|_| \\__,_\\___/_\\_\\___| |_|  |_|\\_,_\\__, \\___|_||_|"
+echo "                                             |___/"
+echo ""
 echo -e "\e[1;34mWelcome to Karaoke Mugen Installer\e[0m\n\n\e[1;33m/!\ It's recommanded to run this script under a wired connection.\nIf the installation fail, just launch the script once again\e[0m\n"
 sleep 5
 
