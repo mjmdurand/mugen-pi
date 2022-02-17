@@ -34,35 +34,35 @@ else
   for CHOICE in $CHOICES; do
     case "$CHOICE" in
     "Core")
-      source lib/core.sh
+      source ${MUGEN_PI_DIR}/lib/core.sh
       ;;
     "Launch")
-      source lib/launch.sh
+      source ${MUGEN_PI_DIR}/lib/launch.sh
       echo -e "\e[1;33mYou need to restart to apply the changes (launch shortcut).\e[0m"
       whiptail --title "Karaoke Mugen installation" --msgbox "You'll need to restart or logout to finish the installation of the following element : \n\n- Launch shortcut" 15 60
       ;;
     "Update")
-        source lib/update.sh
+        source ${MUGEN_PI_DIR}/lib/update.sh
       echo "Option 3 was selected"
       echo -e "\e[1;33mYou need to restart to apply the changes (update shortcut).\e[0m"
       whiptail --title "Karaoke Mugen installation" --msgbox "You'll need to restart or logout to finish the installation of the following element : \n\n- Update shortcut" 15 60
       ;;
     "Folder")
-    source lib/folders.sh
+    source ${MUGEN_PI_DIR}/lib/folders.sh
     echo -e "\n\e[1;44mSong folder will be located here ${SONG_DIR}\e[0m\n\e[1;41mPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)\e[0m"
       whiptail --title "Karaoke Mugen installation" --msgbox "Song folder will be located here : \n${SONG_DIR} \n\nPlease, keep the default values while the first start (${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/medias)" 15 60
       ;;
     "Port")
-    source lib/port.sh
+    source ${MUGEN_PI_DIR}/lib/port.sh
       ;;
     "Wallpaper")
-    source lib/wallpaper.sh
+    source ${MUGEN_PI_DIR}/lib/wallpaper.sh
       echo "Option 4 was selected"
       echo -e "\e[1;33mYou need to restart to apply the changes (wallpaper).\e[0m"
       whiptail --title "Karaoke Mugen installation" --msgbox "You'll need to restart or logout to finish the installation of the following element : \n\n- Wallpaper" 15 60
       ;;
     "Filemanager")
-    source lib/filemanager.sh
+    source ${MUGEN_PI_DIR}/lib/filemanager.sh
       echo "Option 5 was selected"
       echo -e "\e[1;33mYou need to restart to apply the changes (filemanager).\e[0m"
       whiptail --title "Karaoke Mugen installation" --msgbox "You'll need to restart or logout to finish the installation of the following element : \n\n- Filemanager" 15 60
