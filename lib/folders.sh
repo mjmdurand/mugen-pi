@@ -60,7 +60,7 @@ echo -e "\e[1;33mKara.moe folder not found, creating it\e[0m"
 mkdir ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/
 else
 echo -e "\e[1;33mKara.moe folder found, removing it.\e[0m"
-read -n 1 -s -r -p "If you have old downloads inside, please move them now in ${SONG_DIR} (press any key to continue)."
+whiptail --title "Karaoke Mugen installation" --msgbox "If you have old downloads inside ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/, please move them now in ${SONG_DIR}" 15 60
 sudo rm -r ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/
 mkdir ${KARAOKE_MUGEN_DIR}/app/repos/kara.moe/
 fi
