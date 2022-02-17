@@ -231,12 +231,8 @@ System:
 fi
 echo -e "\e[1;32mConfiguration file generated.\e[0m"
 
-#Check OS
-#cat /etc/issue
-
-
 #Desktop shortcut
-echo -e "\n\e[1;44mCreating desktop shortcut.\e[0m"
+echo -e "\n\e[1;44mCreating launch desktop shortcut.\e[0m"
 if [ ! -f ~/Desktop/karaokeMugen.desktop ];then
 echo '[Desktop Entry]
 Name=Karaoke Mugen
@@ -248,12 +244,13 @@ Encoding=UTF-8
 Terminal=false
 Categories=None;' > ~/Desktop/karaokeMugen.desktop
 chmod u+x ~/Desktop/karaokeMugen.desktop
-echo -e "\e[1;32mShortcut created.\e[0m"
-echo ""
+echo -e "\e[1;32mLaunch shortcut created.\e[0m"
+else
+echo -e "\e[1;33mLaunch shortcut already exists, skipping.\e[0m"
 fi
 
 #Desktop update shortcut
-echo -e "\e[1;44mCreating update desktop shortcut.\e[0m"
+echo -e "\n\e[1;44mCreating update desktop shortcut.\e[0m"
 if [ ! -f ~/Desktop/karaokeMugenUpdate.desktop ];then
 echo '[Desktop Entry]
 Name=Karaoke Mugen Update
@@ -265,8 +262,9 @@ Encoding=UTF-8
 Terminal=false
 Categories=None;' >> ~/Desktop/karaokeMugenUpdate.desktop
 chmod u+x ~/Desktop/karaokeMugenUpdate.desktop
-echo -e "\e[1;32mShortcut created.\e[0m"
-echo ""
+echo -e "\e[1;32mUpdate shortcut created.\e[0m"
+else
+echo -e "\e[1;33mUpdate shortcut already exists, skipping.\e[0m"
 fi
 
 #Edit filemanager to avoid "open in terminal" window
