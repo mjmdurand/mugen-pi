@@ -107,9 +107,10 @@ fi
 echo -e "\e[1;32mSources successfully downloaded.\e[0m"
 
 #Port Forwarding
-echo -e "\n\e[1;44mPort Forwarding (80 > 1337).\e[0m\n\e[1;41mChoose \"YES\" on next screens (save IPv4/IPv6 rules) if you never installed IPTABLES\e[0m"
-read -n 1 -s -r -p "Understood ! (press any key to continue)."
-sudo apt install -yq iptables-persistent 
+echo -e "\n\e[1;44mPort Forwarding (80 > 1337).\e[0m"
+echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
+echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
+sudo apt install -y iptables-persistent &>> ${LOG}
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 1337
 
 # setting postgresql database
