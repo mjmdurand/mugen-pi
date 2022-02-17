@@ -4,6 +4,7 @@ MUGEN_PI_DIR=$PWD
 KARAOKE_MUGEN_DIR=~/karaokemugen-app
 SONG_DIR=~/songs-karaokemugen
 MPVREQUIRED=0.32.0-1
+LOG = $PWD/log.txt
 
 #Welcome message
 clear
@@ -19,15 +20,15 @@ sleep 5
 
 # update system and install softwares
 echo -e "\e[1;34mUpdating the system.\e[0m"
-sudo apt update -q && sudo apt upgrade -yq
+sudo apt update -q && sudo apt upgrade -yq &> ${LOG}
 echo -e "\e[1;32mSystem updated.\e[0m"
 
 echo -e "\n\e[1;34mInstalling required software.\e[0m"
 # adding nodejs 14.x repositories
-curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
-sudo apt install -yq nodejs mpv ffmpeg postgresql libpq-dev postgresql-client postgresql-client-common git
-sudo npm install -g yarn
-sudo apt autoremove -yq
+curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - &>> ${LOG}
+sudo apt install -yq nodejs mpv ffmpeg postgresql libpq-dev postgresql-client postgresql-client-common git &>> ${LOG}
+sudo npm install -g yarn &>> ${LOG}
+sudo apt autoremove -yq &>> ${LOG}
 echo -e "\e[1;32mRequired software installation done.\e[0m"
 
 #checking mpv version
@@ -92,13 +93,13 @@ fi
 
 if [ ${VERSION_TO_INSTALL} = "Latest" ];then
 echo -e "\e[1;33mDownloading Latest version\e[0m"
-git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git
+git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG}
 elif [ ${VERSION_TO_INSTALL} = "Next" ];then
 echo -e "\e[1;33mDownloading Next version\e[0m"
-git clone --recursive --branch next https://gitlab.com/karaokemugen/karaokemugen-app.git
+git clone --recursive --branch next https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG}
 else
 echo -e "\e[1;33mDownloading ${VERSION_TO_INSTALL} version\e[0m"
-git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git
+git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG}
 cd ${KARAOKE_MUGEN_DIR}
 git checkout ${HASH_COMMIT}
 fi
@@ -108,7 +109,7 @@ echo -e "\e[1;32mSources successfully downloaded.\e[0m"
 echo ""
 echo -e "\n\e[1;34mPort Forwarding (80 > 1337).\e[0m\n\e[1;41mChoose \"YES\" on next screens (save IPv4/IPv6 rules) if you never installed IPTABLES\e[0m"
 read -n 1 -s -r -p "Understood ! (press any key to continue)."
-sudo apt install -yq iptables-persistent
+sudo apt install -yq iptables-persistent 
 sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 1337
 
 # setting postgresql database
@@ -132,10 +133,11 @@ sed -i '/sentry\/cli/d' package.json
 echo -e "\e[1;32mPackage list updated.\e[0m"
 
 # build karaoke mugen
-echo -e "\n\e[1;34mBuilding Karaoke Mugen.\e[0m\n\e[1;41mThis operation will take time and terminal may crash if you use wifi connexion\e[0m"
+echo -e "\n\e[1;34mBuild Karaoke Mugen.\e[0m\n\e[1;41mThis operation will take time and terminal may crash if you use wifi connexion\e[0m"
 read -n 1 -s -r -p "Understood ! (press any key to continue)."
-yarn gitconfig
-yarn setup
+echo -e "\e[1;33mBuild started, please wait a moment.\e[0m"
+yarn gitconfig &>> ${LOG}
+yarn setup &>> ${LOG}
 
 # Editing mpv required version at launch 0.33 > 0.32
 sed -i "s/MPVVersion = '>=0.33.0'/MPVVersion = '>=0.32.0'/g" ~/karaokemugen-app/src/utils/constants.ts
