@@ -49,36 +49,37 @@ fi
 #if mpv version is > 0.32, user can choose version to install
 echo -e "\n\e[1;44mSelect Karaoke Mugen version.\e[0m"
 if [ ${MPVCHECK} = true ];then
-PS3='Version to install (1,2,3 or 4) : '
-versions=("Latest" "Next" "5.0.37" "Quit")
-select fav in "${versions[@]}"; do
-    case $fav in
-        "Latest")
-            VERSION_TO_INSTALL=$fav
-            echo -e "\n\e[1;33mCurrent\e[0m\e[33m version will be installed.\e[0m\n\e[1;41m /!\ /\e[0m \e[1;41m You may have some bugs by installing this version\e[0m \e[1;41m /!\ \e[0m"
-            read -n 1 -s -r -p "Press any key to continue."
-            break
-            ;;
-        "Next")
-            VERSION_TO_INSTALL=$fav
-            echo -e "\n\e[1;33mNext \e[0m\e[33m version will be installed.\e[0m\n\e[1;41m /!\ \e[0m \e[1;41m You may have some bugs by installing this version\e[0m \e[1;41m /!\ \e[0m"
-            read -n 1 -s -r -p "Press any key to continue."
-            break
-            ;;
-        "5.0.37")
-            VERSION_TO_INSTALL=$fav
-            HASH_COMMIT=ec2577cc
-            echo -e "\n\e[1;33mVersion $fav\e[0m\e[33m will be installed\e[0m"
-	        break
-            ;;
-        "Quit")
-            echo -e "\e[1;41mInstallation aborted\e[0m"
-            exit
-            ;;
-        *) echo -e "\e[1;41minvalid option $REPLY\e[0m";;
-    esac
-done
-echo ""
+    OPTION=$(whiptail --title "Menu Box" --menu "Choisissez votre distriubtion linux" 15 60 4 \
+    "1" "Latest" \
+    "2" "Next" \
+    "3" "5.0.37" 3>&1 1>&2 2>&3)
+    
+    exitstatus=$?
+    if [ $exitstatus = 0 ]; then
+        case $OPTION in
+            1)
+                VERSION_TO_INSTALL="Latest"
+                echo -e "\n\e[1;33mLatest\e[0m\e[33m version will be installed.\e[0m\n\e[1;41m /!\ /\e[0m \e[1;41m You may have some bugs by installing this version\e[0m \e[1;41m /!\ \e[0m"
+                break
+                ;;
+            2)
+                VERSION_TO_INSTALL="Next"
+                echo -e "\n\e[1;33mNext\e[0m\e[33m version will be installed.\e[0m\n\e[1;41m /!\ /\e[0m \e[1;41m You may have some bugs by installing this version\e[0m \e[1;41m /!\ \e[0m"
+                break
+                ;;
+            3)
+                VERSION_TO_INSTALL="5.0.37"
+                HASH_COMMIT=ec2577cc
+                echo -e "\n\e[1;33mVersion 5.0.37\e[0m\e[33m will be installed\e[0m"
+                break
+                ;;
+            *)
+                echo -e "\n\e[1;33mCurrent\e[0m\e[33m version will be installed.\e[0m\n\e[1;41m /!\ /\e[0m \e[1;41m You may have some bugs by installing this version\e[0m \e[1;41m /!\ \e[0m"
+                break
+                ;;
+        esac
+    fi
+    echo ""
 fi
 
 #moving to user's directory
