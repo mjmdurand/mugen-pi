@@ -30,7 +30,7 @@ fi
 #if mpv version is > 0.32, user can choose version to install
 echo -e "\n\e[1;44mSelect Karaoke Mugen version.\e[0m"
 if [ ${MPVCHECK} = true ];then
-    OPTION=$(whiptail --title "Karaoke Mugen installation" --menu "Choisissez votre distriubtion linux" 15 60 4 \
+    OPTION=$(whiptail --title "Karaoke Mugen installation" --menu "Choose the version you want to intall" 15 60 4 \
     "1" "Latest" \
     "2" "Next" \
     "3" "5.0.37" 3>&1 1>&2 2>&3)
