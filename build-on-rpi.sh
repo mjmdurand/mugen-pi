@@ -135,7 +135,7 @@ echo -e "\e[1;32mPackage list updated.\e[0m"
 # build karaoke mugen
 echo -e "\n\e[1;44mBuild Karaoke Mugen.\e[0m\n\e[1;41mThis operation will take time and terminal may crash if you use wifi connexion\e[0m"
 read -n 1 -s -r -p "Understood ! (press any key to continue)."
-echo -e "\n\e[1;33mBuild started, please wait a moment (5-10 mins).\e[0m"
+echo -e "\n\e[1;33mBuild started, please wait a moment (10-15 mins).\e[0m"
 yarn gitconfig &>> ${LOG}
 yarn setup &>> ${LOG}
 
