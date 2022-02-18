@@ -108,6 +108,7 @@ echo -e "\e[1;32mSources successfully downloaded.\e[0m"
 # setting postgresql database
 echo -e "\n\e[1;44mCreating Postegresql database, user and grant privileges.\e[0m"
 sudo service postgresql start
+cd ~postgres/
 sudo -u postgres psql -c "DROP DATABASE IF EXISTS karaokemugen_app;"
 sudo -u postgres psql -c "CREATE DATABASE karaokemugen_app ENCODING 'UTF8';"
 sudo -u postgres psql -c "DROP USER IF EXISTS karaokemugen_app;"
