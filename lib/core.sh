@@ -73,36 +73,35 @@ fi
 if [ ${VERSION_TO_INSTALL} = "Latest" ];then
 echo -e "\e[1;33mDownloading Latest version\e[0m"
 git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG} &
-{
-    for ((i = 0 ; i <= 100 ; i+=1)); do
-        sleep 0.3
-        echo $i
-    done
-} | whiptail --title "Karaoke Mugen installation" --gauge "Downloading Karaoke Mugen" 8 78 0
-wait -n
 elif [ ${VERSION_TO_INSTALL} = "Next" ];then
 echo -e "\e[1;33mDownloading Next version\e[0m"
 git clone --recursive --branch next https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG} &
-{
-    for ((i = 0 ; i <= 100 ; i+=1)); do
-        sleep 0.3
-        echo $i
-    done
-} | whiptail --title "Karaoke Mugen installation" --gauge "Downloading Karaoke Mugen" 8 78 0
-wait -n
 else
 echo -e "\e[1;33mDownloading ${VERSION_TO_INSTALL} version\e[0m"
 git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG} &
-{
-    for ((i = 0 ; i <= 100 ; i+=1)); do
-        sleep 0.3
-        echo $i
-    done
-} | whiptail --title "Karaoke Mugen installation" --gauge "Downloading Karaoke Mugen" 8 78 0
-wait -n
+sleep 10
 cd ${KARAOKE_MUGEN_DIR}
 git checkout ${HASH_COMMIT}
 fi
+
+# Keep checking if the process is running. And keep a count.
+{
+        i="0"
+        while (true)
+        do
+            proc=$(ps aux | grep -v grep | grep -e "git")
+            if [[ "$proc" == "" ]]; then break; fi
+            # Sleep for a longer period if the build is long
+            sleep 6
+            echo $i
+            i=$(expr $i + 1)
+        done
+        # If it is done then display 100%
+        echo 100
+        # Give it some time to display the progress to the user.
+        sleep 2
+} | whiptail --title "Karaoke Mugen installation" --gauge "Downloading Karaoke Mugen" 8 78 0
+
 echo -e "\e[1;32mSources successfully downloaded.\e[0m"
 
 # setting postgresql database
