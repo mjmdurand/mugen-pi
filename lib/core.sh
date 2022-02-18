@@ -92,7 +92,7 @@ fi
             proc=$(pidof git)
             if [[ "$proc" == "" ]]; then break; fi
             # Sleep for a longer period if the build is long
-            sleep 6
+            sleep 0.3
             echo $i
             i=$(expr $i + 1)
         done
