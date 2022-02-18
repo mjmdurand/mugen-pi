@@ -89,7 +89,7 @@ fi
         i="0"
         while (true)
         do
-            proc=$(ps aux | grep -v grep | grep -e "git")
+            proc=$(pidof git)
             if [[ "$proc" == "" ]]; then break; fi
             # Sleep for a longer period if the build is long
             sleep 6
@@ -135,7 +135,7 @@ yarn gitconfig &>> ${LOG}
         i="0"
         while (true)
         do
-            proc=$(ps aux | grep -v grep | grep -e "node")
+            proc=$(pidof node)
             if [[ "$proc" == "" ]]; then break; fi
             # Sleep for a longer period if the build is long
             sleep 6
