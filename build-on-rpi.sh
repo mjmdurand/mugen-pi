@@ -6,6 +6,7 @@ SONG_DIR=~/songs-karaokemugen
 MPVREQUIRED=0.32.0-1
 LOG=$PWD/log.txt
 RESTART=false
+DESKTOP_PATH=`xdg-user-dir DESKTOP`
 
 #Welcome message
 clear
