@@ -116,7 +116,7 @@ echo -e "\n\e[1;44mCreating Postegresql database, user and grant privileges.\e[0
 sudo service postgresql start
 cd ~postgres/
 sudo -u postgres psql -c "DROP DATABASE IF EXISTS karaokemugen_app;"
-sudo -u postgres psql -c "CREATE DATABASE karaokemugen_app ENCODING 'UTF8';"
+sudo -u postgres psql -c "CREATE DATABASE karaokemugen_app ENCODING 'UTF-8' LC_COLLATE = 'C.UTF8'  LC_CTYPE ='C.UTF8' TEMPLATE = template0;"
 sudo -u postgres psql -c "DROP USER IF EXISTS karaokemugen_app;"
 sudo -u postgres psql -c "CREATE USER karaokemugen_app WITH ENCRYPTED PASSWORD 'musubi';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE karaokemugen_app TO karaokemugen_app;"
