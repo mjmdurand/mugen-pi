@@ -44,7 +44,7 @@ fi
 echo -e "\n\e[1;44mSelect Karaoke Mugen version.\e[0m"
 if [ ${MPVCHECK} = true ];then
     OPTION=$(whiptail --title "Karaoke Mugen installation" --menu "Choose the version you want to intall" 15 60 4 \
-    "1" "Latest" \
+    "1" "Latest stable" \
     "2" "Next" \
     "3" "5.0.37" 3>&1 1>&2 2>&3)
     
@@ -52,8 +52,8 @@ if [ ${MPVCHECK} = true ];then
     if [ $exitstatus = 0 ]; then
         case $OPTION in
             1)
-                VERSION_TO_INSTALL="Latest"
-                echo -e "\n\e[1;33mLatest\e[0m\e[33m version will be installed.\e[0m\n\e[1;41m /!\ /\e[0m \e[1;41m You may have some bugs by installing this version\e[0m \e[1;41m /!\ \e[0m"
+                VERSION_TO_INSTALL="Latest stable"
+                echo -e "\n\e[1;33mLatest stable\e[0m\e[33m version will be installed.\e[0m"
                 ;;
             2)
                 VERSION_TO_INSTALL="Next"
@@ -83,9 +83,9 @@ sudo rm -R ${KARAOKE_MUGEN_DIR}
 echo -e "\e[1;33mkaraokemugen-app folder removed.\e[0m"
 fi
 
-if [ ${VERSION_TO_INSTALL} = "Latest" ];then
-echo -e "\e[1;33mDownloading Latest version\e[0m"
-git clone --recursive https://gitlab.com/karaokemugen/code/karaokemugen-app.git &>> ${LOG} &
+if [ ${VERSION_TO_INSTALL} = "Latest stable" ];then
+echo -e "\e[1;33mDownloading Latest stable version\e[0m"
+git clone --recursive --branch master https://gitlab.com/karaokemugen/code/karaokemugen-app.git &>> ${LOG} &
 elif [ ${VERSION_TO_INSTALL} = "Next" ];then
 echo -e "\e[1;33mDownloading Next version\e[0m"
 git clone --recursive --branch next https://gitlab.com/karaokemugen/code/karaokemugen-app.git &>> ${LOG} &
