@@ -111,10 +111,6 @@ fi
 
 echo -e "\e[1;32mSources successfully downloaded.\e[0m"
 
-# setting locales
-sudo locale -a
-sudo sed -i "s/$LANGUAGE/C.UTF8/g" /etc/default/locale
-
 # setting postgresql database
 echo -e "\n\e[1;44mCreating Postegresql database, user and grant privileges.\e[0m"
 sudo service postgresql restart
