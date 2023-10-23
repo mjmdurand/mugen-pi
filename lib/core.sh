@@ -6,7 +6,7 @@ echo -e "\e[1;32mSystem updated.\e[0m"
 
 echo -e "\n\e[1;44mInstalling required software.\e[0m"
 # adding nodejs 14.x repositories
-curl -sL https://deb.nodesource.com/setup_16.x | sudo bash - &>> ${LOG}
+curl -sL https://deb.nodesource.com/setup_18.x | sudo bash - &>> ${LOG}
 sudo apt install -yq curl nodejs mpv ffmpeg postgresql libpq-dev postgresql-client postgresql-client-common git &>> ${LOG}
 sudo npm install -g yarn &>> ${LOG}
 sudo apt autoremove -yq &>> ${LOG}
