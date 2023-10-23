@@ -8,12 +8,12 @@ SONG_DIR=~/songs-karaokemugen
 echo -e "\n\e[1;34mWelcome to Karaoke Mugen Installer\e[0m\n\n\e[1;33m/!\ It's recommanded to run this script under a wired connection.\nIf the installation fail, just launch the script once again\e[0m\n"
 
 PS3='Choose the version to install : '
-versions=("Latest" "Next" "5.0.37" "Quit")
+versions=("Latest stable" "Next" "5.0.37" "Quit")
 select fav in "${versions[@]}"; do
     case $fav in
-        "Latest")
+        "Latest stable")
             VERSION_TO_INSTALL=$fav
-            echo -e "\n\e[1;34mCurrent version will be installed.\e[0m\n\e[1;33m/!\ You may have some bugs by installing this version\e[0m"
+            echo -e "\n\e[1;34mLatest stable version will be installed.\e[0m"
             read -n 1 -s -r -p "Press any key to continue."
             break
             ;;
@@ -84,14 +84,14 @@ sudo rm -R ${KARAOKE_MUGEN_DIR}
 echo -e "\e[1;33mkaraokemugen-app folder removed.\e[0m"
 fi
 
-if [ "${VERSION_TO_INSTALL}" = "Lastest" ];then
-echo "Downloading last version"
-git clone --recursive https://lab.shelter.moe/karaokemugen/karaokemugen-app.git
+if [ "${VERSION_TO_INSTALL}" = "Latest stable" ];then
+echo "Downloading Latest stable version"
+git clone --recursive --branch master https://gitlab.com/karaokemugen/code/karaokemugen-app.git
 elif [ "${VERSION_TO_INSTALL}" = "Next" ];then
-git clone --recursive --branch next https://lab.shelter.moe/karaokemugen/karaokemugen-app.git
+git clone --recursive --branch next https://gitlab.com/karaokemugen/code/karaokemugen-app.git
 else
 echo "Downloading version ${VERSION_TO_INSTALL}"
-git clone --recursive https://lab.shelter.moe/karaokemugen/karaokemugen-app.git
+git clone --recursive https://gitlab.com/karaokemugen/code/karaokemugen-app.git
 cd ${KARAOKE_MUGEN_DIR}
 git checkout ${HASH_COMMIT}
 fi
