@@ -5,8 +5,15 @@ sudo apt update -q &> ${LOG} && sudo apt upgrade -yq &> ${LOG}
 echo -e "\e[1;32mSystem updated.\e[0m"
 
 echo -e "\n\e[1;44mInstalling required software.\e[0m"
-# adding nodejs 14.x repositories
-curl -sL https://deb.nodesource.com/setup_18.x | sudo bash - &>> ${LOG}
+# adding nodejs 18.x repositories
+sudo apt-get install -yq ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+
+NODE_MAJOR=18
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+sudo apt-get install nodejs -y
+
 sudo apt install -yq curl nodejs mpv ffmpeg postgresql libpq-dev postgresql-client postgresql-client-common git &>> ${LOG}
 sudo npm install -g yarn &>> ${LOG}
 sudo apt autoremove -yq &>> ${LOG}
