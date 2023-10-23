@@ -64,6 +64,12 @@ If you wanna use USB 3.0 to boot, just flash your drive (key or disk) with laste
 
 - If you wanna customize karaoke options, go on Operator Panel, click on top right karaoke mugen logo and select Options
 
+# Tested KM versions
+**2023-10-24**
+- Raspberry Pi OS with desktop and recommended software (October 10th 2023, 64-bit, Kernel 6.1, Debian 12)
+- Nodejs 18
+- KM version : 7.1.31
+
 # To-do list
 - Update ... update script
 - check new raspberry pi OS x64
