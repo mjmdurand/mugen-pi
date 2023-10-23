@@ -173,6 +173,13 @@ echo -e "\n\e[1;44mGenerating Karaoke Mugen configuration.\e[0m"
 if [ ! -f "${KARAOKE_MUGEN_DIR}/config.yml" ];then
 echo "
 System:
+ Binaries:
+  ffmpeg:
+   Linux: /usr/bin/ffmpeg
+  patch:
+   Linux: /usr/bin/patch
+  Player:
+   Linux: /usr/bin/mpv
  Database:
   bundledPostgresBinary: false
   database: karaokemugen_app
