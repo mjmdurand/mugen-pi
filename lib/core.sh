@@ -111,9 +111,13 @@ fi
 
 echo -e "\e[1;32mSources successfully downloaded.\e[0m"
 
+# setting locales
+sudo locale -a
+sudo sed -i "s/$LANGUAGE/C.UTF8/g" /etc/default/locale
+
 # setting postgresql database
 echo -e "\n\e[1;44mCreating Postegresql database, user and grant privileges.\e[0m"
-sudo service postgresql start
+sudo service postgresql restart
 cd ~postgres/
 sudo -u postgres psql -c "DROP DATABASE IF EXISTS karaokemugen_app;"
 sudo -u postgres psql -c "CREATE DATABASE karaokemugen_app ENCODING 'UTF-8' LC_COLLATE = 'C.UTF8'  LC_CTYPE ='C.UTF8' TEMPLATE = template0;"
