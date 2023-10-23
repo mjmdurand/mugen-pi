@@ -128,6 +128,7 @@ sudo -u postgres psql -c "CREATE USER karaokemugen_app WITH ENCRYPTED PASSWORD '
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE karaokemugen_app TO karaokemugen_app;"
 sudo -u postgres psql -c "CREATE EXTENSION unaccent;" -d karaokemugen_app
 sudo -u postgres psql -c "CREATE EXTENSION pgcrypto;" -d karaokemugen_app
+sudo -u postgres psql -c "GRANT CREATE ON SCHEMA public TO public;" -d karaokemugen_app
 echo -e "\e[1;32mDatabase successfully configured.\e[0m"
 
 # editing package.json file (sentry/cli not supported on raspi atm)
