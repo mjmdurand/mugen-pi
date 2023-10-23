@@ -72,13 +72,13 @@ fi
 
 if [ ${VERSION_TO_INSTALL} = "Latest" ];then
 echo -e "\e[1;33mDownloading Latest version\e[0m"
-git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG} &
+git clone --recursive https://gitlab.com/karaokemugen/code/karaokemugen-app.git &>> ${LOG} &
 elif [ ${VERSION_TO_INSTALL} = "Next" ];then
 echo -e "\e[1;33mDownloading Next version\e[0m"
-git clone --recursive --branch next https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG} &
+git clone --recursive --branch next https://gitlab.com/karaokemugen/code/karaokemugen-app.git &>> ${LOG} &
 else
 echo -e "\e[1;33mDownloading ${VERSION_TO_INSTALL} version\e[0m"
-git clone --recursive https://gitlab.com/karaokemugen/karaokemugen-app.git &>> ${LOG} &
+git clone --recursive https://gitlab.com/karaokemugen/code/karaokemugen-app.git &>> ${LOG} &
 sleep 10
 cd ${KARAOKE_MUGEN_DIR}
 git checkout ${HASH_COMMIT}
