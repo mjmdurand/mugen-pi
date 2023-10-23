@@ -6,7 +6,7 @@ echo -e "\e[1;32mSystem updated.\e[0m"
 
 echo -e "\n\e[1;44mInstalling required software.\e[0m"
 # adding nodejs 18.x repositories
-sudo apt-get install -yq ca-certificates curl gnupg
+sudo apt install -yq ca-certificates curl gnupg
 
 if [ -f "/etc/apt/keyrings/nodesource.gpg" ]; then
     echo "nodesource.gpg exists, skipping key installation."
@@ -20,8 +20,8 @@ fi
 
 NODE_MAJOR=18
 echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-sudo apt-get install -yq nodejs 
-sudo apt-get install -yq npm 
+sudo apt install -yq nodejs 
+sudo apt install -yq npm 
 
 sudo apt install -yq curl nodejs mpv ffmpeg postgresql libpq-dev postgresql-client postgresql-client-common git &>> ${LOG}
 sudo npm install -g yarn &>> ${LOG}
