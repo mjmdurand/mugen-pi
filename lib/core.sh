@@ -12,7 +12,7 @@ if [ -f "/etc/apt/keyrings/nodesource.gpg" ]; then
     echo "nodesource.gpg exists, skipping key installation."
 else
     sudo mkdir -p /etc/apt/keyrings &> ${LOG}
-    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key &> ${LOG} | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg &> ${LOG}
+    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg &> ${LOG}
 fi
 
 NODE_MAJOR=18
