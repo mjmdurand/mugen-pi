@@ -98,12 +98,6 @@ fi
 echo -e "\e[1;32mSources successfully downloaded.\e[0m"
 echo ""
 
-# editing package.json file (sentry/cli not supported on raspi atm)
-echo -e "\n\e[1;34mRemoving Sentry/cli package due to incompatibility.\e[0m"
-cd ${KARAOKE_MUGEN_DIR}
-sed -i '/sentry\/cli/d' package.json
-echo -e "\e[1;32mPackage list updated.\e[0m"
-
 # build karaoke mugen
 echo -e "\n\e[1;34mBuilding Karaoke Mugen.\e[0m\n\e[1;41mThis operation will take time and terminal may crash if you use wifi connexion\e[0m"
 read -n 1 -s -r -p "Press any key to continue."
