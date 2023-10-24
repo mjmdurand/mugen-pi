@@ -71,7 +71,6 @@ If you wanna use USB 3.0 to boot, just flash your drive (key or disk) with laste
 - KM version : 7.1.31
 
 # To-do list
-- Update ... update script
-- check new raspberry pi OS x64
+- Make update script similar to install script to improve User experience
 - add ubuntu support for desktop & shortcuts (AKA Gnome)
 
