@@ -19,4 +19,4 @@ cd ~/karaokemugen-app
 #yarn startNoElectron
 
 #launch Karaoke Mugen with electron
-yarn start
+yarn start &> running_log.txt
