@@ -101,6 +101,7 @@ echo ""
 # build karaoke mugen
 echo -e "\n\e[1;34mBuilding Karaoke Mugen.\e[0m\n\e[1;41mThis operation will take time and terminal may crash if you use wifi connexion\e[0m"
 read -n 1 -s -r -p "Press any key to continue."
+cd ${KARAOKE_MUGEN_DIR}
 yarn gitconfig
 yarn setup
 echo -e "\e[1;34mBuild done.\e[0m"
