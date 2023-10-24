@@ -8,10 +8,10 @@ SONG_DIR=~/songs-karaokemugen
 echo -e "\n\e[1;34mWelcome to Karaoke Mugen Installer\e[0m\n\n\e[1;33m/!\ It's recommanded to run this script under a wired connection.\nIf the installation fail, just launch the script once again\e[0m\n"
 
 PS3='Choose the version to install : '
-versions=("Latest stable" "Next" "5.0.37" "Quit")
+versions=("Latest_stable" "Next" "5.0.37" "Quit")
 select fav in "${versions[@]}"; do
     case $fav in
-        "Latest stable")
+        "Latest_stable")
             VERSION_TO_INSTALL=$fav
             echo -e "\n\e[1;34mLatest stable version will be installed.\e[0m"
             read -n 1 -s -r -p "Press any key to continue."
@@ -84,7 +84,7 @@ sudo rm -R ${KARAOKE_MUGEN_DIR}
 echo -e "\e[1;33mkaraokemugen-app folder removed.\e[0m"
 fi
 
-if [ "${VERSION_TO_INSTALL}" = "Latest stable" ];then
+if [ "${VERSION_TO_INSTALL}" = "Latest_stable" ];then
 echo "Downloading Latest stable version"
 git clone --recursive --branch master https://gitlab.com/karaokemugen/code/karaokemugen-app.git
 elif [ "${VERSION_TO_INSTALL}" = "Next" ];then
