@@ -1,6 +1,12 @@
 # Mugen Pi V2
 Install Karaoke Mugen on your Raspberry Pi.
 
+# Tested KM versions
+**2023-10-24**
+- Raspberry Pi OS with desktop and recommended software (October 10th 2023, 64-bit, Kernel 6.1, Debian 12)
+- Nodejs 18
+- KM version : 7.1.31
+  
 # Requirements
 - 1x Raspberry Pi 4 model B (4 or 8 go)
 - 1x micro SD card*
@@ -63,12 +69,6 @@ If you wanna use USB 3.0 to boot, just flash your drive (key or disk) with laste
 - System panel is located at `/system`
 
 - If you wanna customize karaoke options, go on Operator Panel, click on top right karaoke mugen logo and select Options
-
-# Tested KM versions
-**2023-10-24**
-- Raspberry Pi OS with desktop and recommended software (October 10th 2023, 64-bit, Kernel 6.1, Debian 12)
-- Nodejs 18
-- KM version : 7.1.31
 
 # To-do list
 - Make update script similar to install script to improve User experience
