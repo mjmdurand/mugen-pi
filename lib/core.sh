@@ -52,7 +52,7 @@ if [ ${MPVCHECK} = true ];then
     if [ $exitstatus = 0 ]; then
         case $OPTION in
             1)
-                VERSION_TO_INSTALL="Latest stable"
+                VERSION_TO_INSTALL="Latest_stable"
                 echo -e "\n\e[1;33mLatest stable\e[0m\e[33m version will be installed.\e[0m"
                 ;;
             2)
@@ -83,7 +83,7 @@ sudo rm -R ${KARAOKE_MUGEN_DIR}
 echo -e "\e[1;33mkaraokemugen-app folder removed.\e[0m"
 fi
 
-if [ ${VERSION_TO_INSTALL} = "Latest stable" ];then
+if [ ${VERSION_TO_INSTALL} = "Latest_stable" ];then
 echo -e "\e[1;33mDownloading Latest stable version\e[0m"
 git clone --recursive --branch master https://gitlab.com/karaokemugen/code/karaokemugen-app.git &>> ${LOG} &
 elif [ ${VERSION_TO_INSTALL} = "Next" ];then
