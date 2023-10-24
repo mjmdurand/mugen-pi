@@ -134,6 +134,7 @@ echo -e "\e[1;32mDatabase successfully configured.\e[0m"
 # build karaoke mugen
 echo -e "\n\e[1;44mBuild Karaoke Mugen.\e[0m\n\e[1;41mThis operation will take time and terminal may crash if you use wifi connexion\e[0m"
 echo -e "\n\e[1;33mBuild started, please wait a moment (10-15 mins).\e[0m"
+cd ${KARAOKE_MUGEN_DIR}
 yarn gitconfig &>> ${LOG}
 
 # Start yarn setup and send it to the background.
